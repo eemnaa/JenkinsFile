@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                // Commande pour compiler le projet
+                sh 'make build'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                // Commande pour exécuter les tests
+                sh 'make test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+                // Commande pour déployer l'application
+                sh 'make deploy'
+            }
+        }
+    }
+
+    post {
+        // Action après le pipeline, en cas de succès ou échec
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
